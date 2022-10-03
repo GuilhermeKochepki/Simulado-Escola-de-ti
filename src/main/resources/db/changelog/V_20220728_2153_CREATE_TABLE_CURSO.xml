@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="0" author="guilherme.kochepki">
+
+		<createTable tableName="curso">
+
+			<column name="id" type="numeric(10,0)">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="pk_curso" />
+			</column>
+
+			<column name="codigo_curso" type="numeric(10,0)"></column>
+			
+			<column name="nome" type="varchar(100)"></column>
+			<column name="ch_minima" type="numeric(10,0)"></column>
+			<column name="ch_maxima" type="numeric(10,0)"></column>
+			<column name="data_aprovacao" type="date"></column>
+		</createTable>
+	</changeSet>
+	
+	<changeSet id="1" author="guilherme.kochepki">
+		<sql>
+			CREATE SEQUENCE hibernate_sequence START 1;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="2" author="guilherme.kochepki">
+		<createTable tableName="consumidor">
+			<column name="id" type="varchar(100)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="pk_consumidor"/>
+			</column>
+			<column name="nome" type="varchar(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="cpf" type="varchar(11)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<createTable tableName="nota_fiscal">
+			<column name="id" type="varchar(100)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="pk_nota_fiscal"/>
+			</column>
+			<column name="cpf" type="varchar(100)">
+				<constraints nullable="false" foreignKeyName="cpf_consumidor"/>
+			</column>
+			<column name="data_hora" type="varchar(100)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+	
+</databaseChangeLog>
